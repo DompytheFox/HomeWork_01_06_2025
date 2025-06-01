@@ -69,14 +69,16 @@ public class MusicVoteForm extends HttpServlet {
                 writer.write("<tr><td>" + genresArr[Integer.parseInt(e.getKey())] + "</td><td>" + e.getValue() + "</td></tr>");
             }
             writer.write("</table>");
+
             writer.write("<table border = '0' cellpadding = '5' width = '400'>");
+            writer.write("<tr><td><button onclick=\"document.location='./'\">На главную</button></td></tr>");
             writer.write("<tr><td><b>Комментарии:</b></td></tr>");
             for (Map.Entry<String, Date> e : mapSorter(aboutMap)) {
                 writer.write("<tr><td>" + e.getKey() + "</td></tr>");
                 writer.write("<tr><td><span style='color: gray; font-size: 12px;'>добавлено " + e.getValue() + "</span></td></tr>");
             }
             writer.write("<tr><td></td></tr>");
-            writer.write("<tr><td><button onclick=\"document.location='./'\">На главную</button></td></tr>");
+
             writer.write("</table>");
         }
     }
