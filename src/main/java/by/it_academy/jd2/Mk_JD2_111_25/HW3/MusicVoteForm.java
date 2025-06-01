@@ -16,7 +16,7 @@ import java.util.*;
 public class MusicVoteForm extends HttpServlet {
 
     String[] artistsArr = new String[]{"Korpiklaani", "Валентина Легкоступова", "Кирилл Сочный", "Красная Плесень"};
-    String[] genresArr = new String[]{"Post-punk", "Heavy metal", "Retrowave", "Italo disco", "Goregrind", "Pop music", "Gangsta rap", "Nerdcore", "Jazz", "Другой жанр"};
+    String[] genresArr = new String[]{"Post-punk", "Heavy metal", "Retrowave", "Italo disco", "Chanson", "Pop music", "Gangsta rap", "Nerdcore", "Jazz", "Другой жанр"};
 
     HashMap<String, Integer> artistMap = new HashMap<>();
     HashMap<String, Integer> genreMap = new HashMap<>();
