@@ -57,31 +57,21 @@ public class MusicVoteForm extends HttpServlet {
                 }
             }
             aboutMap.put(about, voteDate);
-            List<Map.Entry<String, Integer>> artVotes = new ArrayList<>(artistMap.entrySet());
-            List<Map.Entry<String, Integer>> genreVotes = new ArrayList<>(genreMap.entrySet());
-            List<Map.Entry<String, Date>> abouts = new ArrayList<>(aboutMap.entrySet());
-
-            artVotes.sort(Map.Entry.comparingByValue());
-            Collections.reverse(artVotes);
-            genreVotes.sort(Map.Entry.comparingByValue());
-            Collections.reverse(genreVotes);
-            abouts.sort(Map.Entry.comparingByValue());
-            Collections.reverse(abouts);
 
             writer.write("<p><span style='color: red; font-size: 22px;'>Результаты голосования</span></p>");
             writer.write("<table border = '0' cellpadding = '5' width = '400'>");
             writer.write("<tr><td><b>Исполнители</b></td><td><b>Голоса</b></td></tr>");
-            for (Map.Entry<String, Integer> e : artVotes) {
+            for (Map.Entry<String, Integer> e : mapSorter(artistMap)) {
                 writer.write("<tr><td>" + artistsArr[Integer.parseInt(e.getKey())] + "</td><td>" + e.getValue() + "</td></tr>");
             }
             writer.write("<tr><td><b>Жанры</b></td><td><b>Голоса</b></td></tr>");
-            for (Map.Entry<String, Integer> e : genreVotes) {
+            for (Map.Entry<String, Integer> e : mapSorter(genreMap)) {
                 writer.write("<tr><td>" + genresArr[Integer.parseInt(e.getKey())] + "</td><td>" + e.getValue() + "</td></tr>");
             }
             writer.write("</table>");
             writer.write("<table border = '0' cellpadding = '5' width = '400'>");
             writer.write("<tr><td><b>Комментарии:</b></td></tr>");
-            for (Map.Entry<String, Date> e : abouts) {
+            for (Map.Entry<String, Date> e : mapSorter(aboutMap)) {
                 writer.write("<tr><td>" + e.getKey() + "</td></tr>");
                 writer.write("<tr><td><span style='color: gray; font-size: 12px;'>добавлено " + e.getValue() + "</span></td></tr>");
             }
@@ -89,6 +79,13 @@ public class MusicVoteForm extends HttpServlet {
             writer.write("<tr><td><button onclick=\"document.location='./'\">На главную</button></td></tr>");
             writer.write("</table>");
         }
+    }
+
+    public static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> mapSorter(Map<K, V> m) {
+        List<Map.Entry<K, V>> li = new ArrayList<>(m.entrySet());
+        li.sort(Map.Entry.comparingByValue());
+        Collections.reverse(li);
+        return li;
     }
 }
 
